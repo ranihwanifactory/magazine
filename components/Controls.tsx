@@ -3,6 +3,8 @@ import {
   Play, Pause, SkipBack, SkipForward, 
   Maximize, Minimize, Volume2, VolumeX, X 
 } from 'lucide-react';
+import { Language } from '../types';
+import { TRANSLATIONS } from '../constants';
 
 interface ControlsProps {
   isPlaying: boolean;
@@ -13,6 +15,7 @@ interface ControlsProps {
   isFullscreen: boolean;
   audioRef: React.RefObject<HTMLAudioElement>;
   onClose: () => void;
+  language: Language;
 }
 
 export const Controls: React.FC<ControlsProps> = ({
@@ -23,11 +26,13 @@ export const Controls: React.FC<ControlsProps> = ({
   onFullscreen,
   isFullscreen,
   audioRef,
-  onClose
+  onClose,
+  language
 }) => {
   const [isMuted, setIsMuted] = useState(false);
   const [showControls, setShowControls] = useState(true);
   let timeoutRef = React.useRef<number | null>(null);
+  const t = TRANSLATIONS[language];
 
   const toggleMute = () => {
     if (audioRef.current) {
@@ -46,11 +51,13 @@ export const Controls: React.FC<ControlsProps> = ({
 
     window.addEventListener('mousemove', resetTimer);
     window.addEventListener('touchstart', resetTimer);
+    window.addEventListener('keydown', resetTimer); // Show on key press too
     resetTimer();
 
     return () => {
       window.removeEventListener('mousemove', resetTimer);
       window.removeEventListener('touchstart', resetTimer);
+      window.removeEventListener('keydown', resetTimer);
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
   }, []);
@@ -61,7 +68,7 @@ export const Controls: React.FC<ControlsProps> = ({
        <button 
           onClick={onClose}
           className="absolute top-6 right-6 z-50 p-3 rounded-full bg-black/20 hover:bg-white/20 text-white backdrop-blur-md border border-white/10 transition-all duration-300 hover:rotate-90"
-          title="Close Album"
+          title={t.closeTooltip}
         >
           <X size={20} />
         </button>

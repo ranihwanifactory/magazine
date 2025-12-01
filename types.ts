@@ -14,3 +14,5 @@ export enum ViewState {
   LANDING = 'LANDING',
   VIEWER = 'VIEWER',
 }
+
+export type Language = 'en' | 'ko';

@@ -1,17 +1,20 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { AlbumPhoto } from '../types';
+import { AlbumPhoto, Language } from '../types';
+import { TRANSLATIONS } from '../constants';
 
 interface MagazineSlideProps {
   photo: AlbumPhoto;
   index: number;
   total: number;
   isActive: boolean;
+  language: Language;
 }
 
-export const MagazineSlide: React.FC<MagazineSlideProps> = ({ photo, index, total, isActive }) => {
+export const MagazineSlide: React.FC<MagazineSlideProps> = ({ photo, index, total, isActive, language }) => {
   // Layout logic: alternate alignment based on index for visual variety
   const isEven = index % 2 === 0;
+  const t = TRANSLATIONS[language];
   
   const textVariants = {
     hidden: { opacity: 0, y: 40 },
@@ -58,7 +61,7 @@ export const MagazineSlide: React.FC<MagazineSlideProps> = ({ photo, index, tota
                <div className={`flex items-center gap-4 mb-6 ${isEven ? '' : 'flex-row-reverse'}`}>
                   <span className="h-px w-12 md:w-20 bg-amber-200/70"></span>
                   <span className="text-xs md:text-sm font-bold tracking-[0.3em] uppercase text-amber-100/90 drop-shadow-md">
-                    {photo.date || 'Family Archive'}
+                    {photo.date || t.archive}
                   </span>
                </div>
                
@@ -68,8 +71,8 @@ export const MagazineSlide: React.FC<MagazineSlideProps> = ({ photo, index, tota
                </h2>
                
                {/* Description / Caption */}
-               <p className={`font-light text-stone-200 leading-relaxed text-lg md:text-2xl max-w-xl mt-8 drop-shadow-lg ${isEven ? '' : 'ml-auto'}`}>
-                 A moment frozen in time. This memory is preserved in the family Lumière archive, volume {index + 1}.
+               <p className={`font-light text-stone-200 leading-relaxed text-lg md:text-2xl max-w-xl mt-8 drop-shadow-lg word-keep-all ${isEven ? '' : 'ml-auto'}`}>
+                 {t.moment} {language === 'en' ? `, volume ${index + 1}.` : ''}
                </p>
             </motion.div>
 
@@ -80,9 +83,9 @@ export const MagazineSlide: React.FC<MagazineSlideProps> = ({ photo, index, tota
               transition={{ delay: 1.2, duration: 1 }}
               className={`mt-12 flex items-center gap-4 text-xs uppercase tracking-widest text-stone-400 ${isEven ? '' : 'flex-row-reverse'}`}
             >
-               <span>Page {index + 1} of {total}</span>
+               <span>{t.page} {index + 1} {t.of} {total}</span>
                <span className="w-1 h-1 bg-stone-400 rounded-full"></span>
-               <span className="font-serif italic">Lumière Collection</span>
+               <span className="font-serif italic">{t.collection}</span>
             </motion.div>
 
         </div>
