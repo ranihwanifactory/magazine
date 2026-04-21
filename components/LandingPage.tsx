@@ -138,9 +138,19 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStart, language, set
           </div>
         </div>
 
-        <p className="text-xs text-stone-400 uppercase tracking-widest mt-12">
-          {t.established} &bull; {t.volume}
-        </p>
+        <div className="flex flex-col items-center gap-3 mt-12">
+          <p className="text-xs text-stone-400 uppercase tracking-widest">
+            {t.established} &bull; {t.volume}
+          </p>
+          <a 
+            href="https://ranihwanibaby.tistory.com/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="text-xs text-stone-500 hover:text-stone-900 transition-colors underline underline-offset-4 decoration-stone-300 hover:decoration-stone-900 font-medium"
+          >
+            {(t as any).blog}
+          </a>
+        </div>
       </div>
     </div>
   );
