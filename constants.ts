@@ -23,7 +23,8 @@ export const TRANSLATIONS = {
     collection: "루미에르 컬렉션",
     archive: "가족 아카이브",
     moment: "시간 속에 멈춘 순간. 이 추억은 루미에르 가족 아카이브에 영원히 보존됩니다.",
-    closeTooltip: "앨범 닫기"
+    closeTooltip: "앨범 닫기",
+    blog: "제작자 블로그"
   },
   en: {
     subtitle: "The Family Archive",
@@ -40,6 +41,7 @@ export const TRANSLATIONS = {
     collection: "Lumière Collection",
     archive: "Family Archive",
     moment: "A moment frozen in time. This memory is preserved in the family Lumière archive.",
-    closeTooltip: "Close Album"
+    closeTooltip: "Close Album",
+    blog: "Creator's Blog"
   }
 };
